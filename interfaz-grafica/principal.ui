@@ -255,19 +255,6 @@
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="textBrowser">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>370</y>
-      <width>361</width>
-      <height>251</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color:white;</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="btn_prender">
     <property name="geometry">
      <rect>
@@ -285,6 +272,23 @@
     </property>
     <property name="text">
      <string>Prender sensor</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_sensor">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>360</y>
+      <width>361</width>
+      <height>251</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+background-color:white;</string>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>

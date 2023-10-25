@@ -1,6 +1,10 @@
 from PyQt6 import uic, QtWidgets
 from PyQt6.QtWidgets import QApplication
 import conexion
+import pymongo
+import colorama
+import random
+import time
 
 #iniciar la aplicacion
 app = QtWidgets.QApplication([])
@@ -21,6 +25,7 @@ def entrada_login():
         login.label_error.setText("correo o contraseña error")
 
 def entrada_principal():
+    
     login.hide()
     principal.show()
     app.exec()
@@ -33,10 +38,30 @@ def crear_nuevo():
     max = principal.line_max.text()
     conexion.sensores.insert_one({"id":id,"nombre":nombre,"minimo":min,"maximo":max})
 
+#funcion actividad sensor
+def activo():
+    lista_sensores = list(conexion.sensores.find())
+
+    med_fue_rango = 0  # mediciones fuera de rango
+
+    while med_fue_rango < 3:
+        sensor = random.choice(lista_sensores)
+        minimo = float(sensor["minimo"])
+        maximo = float(sensor["maximo"])
+        valor = random.uniform(minimo, maximo)
+    
+        if minimo <= valor <= maximo:
+            principal.label_sensor.setText(colorama.Fore.GREEN + f"{sensor['nombre']}: {valor}" + colorama.Style.RESET_ALL)
+        else:
+            principal.label_sensor.setText(colorama.Fore.RED + f"{sensor['nombre']}: {valor}" + colorama.Style.RESET_ALL)
+            med_fue_rango += 1
+        time.sleep(1)
+
+
 # boton
 login.btn_ingreso.clicked.connect(entrada_login)
-principal.btn_creae.clicked.connect(crear_nuevo)
-principal.btn_prender.clicked.connect()
+principal.btn_crear.clicked.connect(crear_nuevo)
+principal.btn_prender.clicked.connect(activo)
 
 # ejecutable
 login.show()
