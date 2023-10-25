@@ -31,7 +31,7 @@ def crear_nuevo():
     nombre = principal.line_nombre.text()
     min = principal.line_min.text()
     max = principal.line_max.text()
-    
+    conexion.sensores.insert_one({"id":id,"nombre":nombre,"minimo":min,"maximo":max})
 
 # boton
 login.btn_ingreso.clicked.connect(entrada_login)
